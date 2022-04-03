@@ -3,103 +3,100 @@
 #include <map>
 #include "tstack.h"
 
-int operacii(char op) {
-  int c = 0;
-  if (op == '(') {
-  c = 0;
-  } else if (op == ')') {
-  c = 1;
-  } else if (op == '+') {
-  c = 2;
-  } else if (op == '-') {
-  c = 2;
-  } else if (op == '*') {
-  c = 3;
-  } else if (op == '/') {
-  c = 3;
-  } else if (op == ' ') {
-  c = 5;
+int pr(char p) {
+  if (p == '(') {
+  return 0;
+  } else if (p == ')') {
+  return 1;
+  } else if (p == '-') {
+  return 2;
+  } else if (p == '+') {
+  return 2;
+  } else if (p == '/') {
+  return 3;
+  } else if (p == '*') {
+  return 3;
+  } else if (p == ' ') {
+  return 4;
   } else {
-  c = 4;
+  return -2;
   }
-  return c;
-  }
+}
 
-int vichislenie(char op, int b, int a) {
-  int res = 0;
-  if (op == '+') {
-  res = b + a;
-  } else if (op == '-') {
-  res = b - a;
-  } else if (op == '*') {
-  res = b * a;
-  } else if ((op == '/') && (a != 0)) {
-  res = b / a;
+int vichisl(char c, int op1, int op2) {
+  if (c == '+') {
+  return (op2 + op1);
+  } else if (c == '-') {
+  return (op2 - op1);
+  } else if (c == '*') {
+  return (op2 * op1);
+  } else if ((c == '/') && (op1 != 0)) {
+  return (op2 / op1);
   } else {
-  res = 0;
+  return 0;
   }
-  return res;
 }
 
 std::string infx2pstfx(std::string inf) {
-  std::string peremenaya;
-  TStack <char, 100> TS;
+  std::string peremen;
+  TStack <char, 100> TT;
+  iny j = 0;
+  for (int j = 0; j < inf.size(); j++) {
+  if (pr(inf[j]) == -2) {
+  peremen.push_back(inf[j]);
+  peremen.push_back(' ');
+  } else {
+  if (pr(inf[j]) == 0) {
+  TT.push(inf[j]);
+  } else if (TT.isEmpty()) {
+  TT.push(inf[j]);
+  } else if ((pr(inf[j]) > pr(TT.get()))) {
+  TT.push(inf[j]);
+  } else if (pr(inf[j]) == 1) {
+  while (pr(TT.get()) != 0) {
+  peremen.push_back(TT.get());
+  peremen.push_back(' ');
+  TT.pop();
+  }
+  TT.pop();
+  } else {
+  while (!TT.isEmpty() && pr(inf[j]) <= pr(TT.get())) {
+  peremen.push_back(TT.get());
+  peremen.push_back(' ');
+  TT.pop();
+  }
+  TT.push(inf[j]);
+  }
+  }
+  }
+  while (!TT.isEmpty()) {
+  peremen.push_back(TT.get());
+  peremen.push_back(' ');
+  TT.pop();
+  }
   int i = 0;
-  for (int i = 0; i < inf.size(); i++) {
-  if (operacii(inf[i]) == 4) {
-  peremenaya.push_back(inf[i]);
-  peremenaya.push_back(' ');
-  } else {
-  if (operacii(inf[i]) == 0) {
-  TS.push(inf[i]);
-  } else if (operacii(inf[i]) == 1) {
-  while (operacii(TS.get()) != 0) {
-  peremenaya.push_back(TS.get());
-  peremenaya.push_back(' ');
-  TS.pop();
+  for (int i = 0; i < post.size(); i++) {
+  if (peremen[post.size() - 1] == ' ')
+  peremen.erase(post.size() - 1);
   }
-  TS.pop();
-  } else if ((operacii(inf[i])) > (operacii(TS.get()))) {
-  TS.push(inf[i]);
-  } else if (TS.isEmpty()) {
-  TS.push(inf[i]);
-  } else {
-  while (!TS.isEmpty() && (operacii(inf[i]) <= operacii(TS.get()))) {
-  peremenaya.push_back(TS.get());
-  peremenaya.push_back(' ');
-  TS.pop();
-  }
-  TS.push(inf[i]);
-  }
-  }
-  }
-  while (!TS.isEmpty()) {
-  peremenaya.push_back(TS.get());
-  peremenaya.push_back(' ');
-  TS.pop();
-  }
-  int j = 0;
-  for (int j = 0; j < peremenaya.size(); j++) {
-  if (peremenaya[peremenaya.size() - 1] == ' ') 
-  peremenaya.erase(peremenaya.size() - 1);
-  }
-  return peremenaya;
+  return peremen;
 }
 
 int eval(std::string pref) {
-  int result = 0;
-  TStack <int, 100> TSt;
-  for (int i = 0; i < pref.size(); i++) {
-  if (operacii(pref[i]) == 4) {
-  TSt.push(pref[i] - '0');
-  } else if (operacii(pref[i]) < 4) {
-  int c = TSt.get();
-  TSt.pop();
-  int d = TSt.get();
-  TSt.pop();
-  TSt.push(vichislenie(pref[i], c, d));
+  int resultat = 0;
+  TStack <int, 100> SS;
+  int k = 0;
+  for (int k = 0; k < pref.size(); k++) {
+  if (pr(pref[k]) == -2) {
+  SS.push(pref[k] - '0');
+  } else if (pr(pref[k]) < 4) {
+  int b = SS.get();
+  SS.pop();
+  int a = SS.get();
+  SS.pop();
+  SS.push(vichisl(pref[k], b, a));
   }
   }
-  result = TSt.get();
-  return result;
+  resultat = SS.get();
+  return resultat;
 }
