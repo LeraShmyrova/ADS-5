@@ -25,7 +25,7 @@ int operacii(char op) {
   return c;
   }
 
-int vichislenie(int a, int b, char op) {
+int vichislenie(char op, b, a) {
   int res = 0;
   if (op == '+') {
   res = b + a;
@@ -45,15 +45,14 @@ std::string infx2pstfx(std::string inf) {
   std::string peremenaya;
   TStack <char, 100> TS;
   int i = 0;
-  while (i < inf.size()) {
-  i++;  
-  if (operacii(inf[i] == 5)) {
+  for (int i = 0; i < inf.size(); i++) {
+  if (operacii(inf[i]) == 5) {
   peremenaya.push_back(inf[i]);
   peremenaya.push_back(' ');
   } else {
-  if (operacii(inf[i] == 0)) {
+  if (operacii(inf[i]) == 0) {
   TS.push(inf[i]);
-  } else if (operacii(inf[i] == 1)) {
+  } else if (operacii(inf[i]) == 1) {
   while (operacii(TS.get()) != 0) {
   peremenaya.push_back(TS.get());
   peremenaya.push_back(' ');
@@ -92,18 +91,16 @@ std::string infx2pstfx(std::string inf) {
 int eval(std::string pref) {
   int result = 0;
   TStack <int, 100> TSt;
-  int i = 0;
-  while (i < pref.size()) {
-  if (operacii(pref[i] == 5)) {
+  for (int i = 0; i < pref.size(); i++) {
+  if (operacii(pref[i]) == 5) {
   TSt.push(pref[i] - '0');
-  } else if (operacii(pref[i] < 4)) {
-  int a = TSt.get();
-  TSt.pop();
+  } else if (operacii(pref[i]) <= 3) {
   int b = TSt.get();
   TSt.pop();
-  TSt.push(vichislenie(a, b, pref[i]));
+  int a = TSt.get();
+  TSt.pop();
+  TSt.push(vichislenie(pref[i], b, a));
   }
-  i++;
   }
   result = TSt.get();
   return result;
