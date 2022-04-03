@@ -46,6 +46,7 @@ std::string infx2pstfx(std::string inf) {
   TStack <char, 100> TS;
   int i = 0;
   while (i < inf.size()) {
+  i++;  
   if (operacii(inf[i] == 5)) {
   peremenaya.push_back(inf[i]);
   peremenaya.push_back(' ');
@@ -100,7 +101,7 @@ int eval(std::string pref) {
   TSt.pop();
   int b = TSt.get();
   TSt.pop();
-  TSt.push(vichislenie(pref[i], a, b));
+  TSt.push(vichislenie(a, b, pref[i]));
   }
   i++;
   }
