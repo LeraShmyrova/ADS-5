@@ -82,19 +82,20 @@ std::string infx2pstfx(std::string inf) {
   while (j < peremenaya.size()) {
   if (peremenaya[peremenaya.size() - 1] == ' ') {
   peremenaya.erase(peremenaya.size() - 1);
-  i++;
+  }
+  j++;
   }
   return peremenaya;
 }
 
 int eval(std::string pref) {
-  TStack <int, 100> TSt;
   int result = 0;
+  TStack <int, 100> TSt;
   int i = 0;
   while (i < pref.size()) {
   if (operacii(pref[i] == 5)) {
   TSt.push(pref[i] - '0');
-  } else if (operacii(pref[i] < 4) {
+  } else if (operacii(pref[i] < 4)) {
   int a = TSt.get();
   TSt.pop();
   int b = TSt.get();
