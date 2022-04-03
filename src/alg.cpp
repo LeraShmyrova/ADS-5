@@ -22,18 +22,18 @@ int operacii(char op) {
   } else {
   c = 5;
   }
-   return c;
+  return c;
   }
 
-int vichislenie(int a, int b, char op){
+int vichislenie(int a, int b, char op) {
   int res = 0;
   if (op == '+') {
   res = b + a;
-  } else if(op == '-') {
+  } else if (op == '-') {
   res = b - a;
-  } else if(op == '*') {
+  } else if (op == '*') {
   res = b * a;
-  } else if((op == '/') && (a != 0)) {
+  } else if ((op == '/') && (a != 0)) {
   res = b / a;
   } else {
   res = 0;
@@ -41,9 +41,9 @@ int vichislenie(int a, int b, char op){
   return res;
 }
 
-std::string infx2pstfx(std::string inf){
+std::string infx2pstfx(std::string inf) {
   std::string peremenaya;
-  TStack <char,100> TS;
+  TStack <char, 100> TS;
   int i = 0;
   while (i < inf.size()) {
   if (operacii(inf[i] == 5)) {
@@ -52,7 +52,7 @@ std::string infx2pstfx(std::string inf){
   } else {
   if (operacii(inf[i] == 0)) {
   TS.push(inf[i]);
-  } else if (operacii(inf[i] == 1) {
+  } else if (operacii(inf[i] == 1)) {
   while (operacii(TS.get()) != 0) {
   peremenaya.push_back(TS.get());
   peremenaya.push_back(' ');
@@ -61,15 +61,15 @@ std::string infx2pstfx(std::string inf){
   TS.pop();
   } else if ((operacii(inf[i])) > (operacii(TS.get()))) {
   TS.push(inf[i]);
-  }else if(TS.isEmpty()) {
+  } else if (TS.isEmpty()) {
   TS.push(inf[i]);
   } else {
-   while ((!TS.isEmpty()) && ((operacii(inf[i])) <= (operacii(TS.get())))) {
-   peremenaya.push_back(TS.get());
-   peremenaya.push_back(' ');
-   TS.pop();
-   }
-   TS.push(inf[i]);
+  while ((!TS.isEmpty()) && ((operacii(inf[i])) <= (operacii(TS.get())))) {
+  peremenaya.push_back(TS.get());
+  peremenaya.push_back(' ');
+  TS.pop();
+  }
+  TS.push(inf[i]);
   }
   }
   }
@@ -81,25 +81,25 @@ std::string infx2pstfx(std::string inf){
   int j = 0;
   while (j < peremenaya.size()) {
   if (peremenaya[peremenaya.size() - 1] == ' ') {
-   peremenaya.erase(peremenaya.size() - 1);
+  peremenaya.erase(peremenaya.size() - 1);
   i++;
   }
   return peremenaya;
 }
 
-int eval(std::string pref){
-  TStack <int,100> TSt;
+int eval(std::string pref) {
+  TStack <int, 100> TSt;
   int result = 0;
   int i = 0;
   while (i < pref.size()) {
-  if (operacii(pref[i] == ) {
+  if (operacii(pref[i] == 5)) {
   TSt.push(pref[i] - '0');
   } else if (operacii(pref[i] < 4) {
   int a = TSt.get();
   TSt.pop();
   int b = TSt.get();
   TSt.pop();
-  TSt.push(vichislenie(pref[i],a,b));
+  TSt.push(vichislenie(pref[i], a, b));
   }
   i++;
   }
