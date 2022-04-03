@@ -18,9 +18,9 @@ int operacii(char op) {
   } else if (op == '/') {
   c = 3;
   } else if (op == ' ') {
-  c = 4;
-  } else {
   c = 5;
+  } else {
+  c = 4;
   }
   return c;
   }
@@ -46,7 +46,7 @@ std::string infx2pstfx(std::string inf) {
   TStack <char, 100> TS;
   int i = 0;
   for (int i = 0; i < inf.size(); i++) {
-  if (operacii(inf[i]) == 5) {
+  if (operacii(inf[i]) == 4) {
   peremenaya.push_back(inf[i]);
   peremenaya.push_back(' ');
   } else {
@@ -64,7 +64,7 @@ std::string infx2pstfx(std::string inf) {
   } else if (TS.isEmpty()) {
   TS.push(inf[i]);
   } else {
-  while ((!TS.isEmpty()) && ((operacii(inf[i])) <= (operacii(TS.get())))) {
+  while (!TS.isEmpty() && (operacii(inf[i]) <= operacii(TS.get()))) {
   peremenaya.push_back(TS.get());
   peremenaya.push_back(' ');
   TS.pop();
@@ -79,11 +79,9 @@ std::string infx2pstfx(std::string inf) {
   TS.pop();
   }
   int j = 0;
-  while (j < peremenaya.size()) {
-  if (peremenaya[peremenaya.size() - 1] == ' ') {
+  for (int j = 0; j < peremenaya.size(); j++) {
+  if (peremenaya[peremenaya.size() - 1] == ' ') 
   peremenaya.erase(peremenaya.size() - 1);
-  }
-  j++;
   }
   return peremenaya;
 }
@@ -92,14 +90,14 @@ int eval(std::string pref) {
   int result = 0;
   TStack <int, 100> TSt;
   for (int i = 0; i < pref.size(); i++) {
-  if (operacii(pref[i]) == 5) {
+  if (operacii(pref[i]) == 4) {
   TSt.push(pref[i] - '0');
-  } else if (operacii(pref[i]) <= 3) {
-  int b = TSt.get();
+  } else if (operacii(pref[i]) < 4) {
+  int c = TSt.get();
   TSt.pop();
-  int a = TSt.get();
+  int d = TSt.get();
   TSt.pop();
-  TSt.push(vichislenie(pref[i], b, a));
+  TSt.push(vichislenie(pref[i], c, d));
   }
   }
   result = TSt.get();
