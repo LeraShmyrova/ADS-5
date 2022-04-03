@@ -104,6 +104,6 @@ int eval(std::string pref) {
   }
   i++;
   }
-  res = TSt.get();
-  return res;
+  result = TSt.get();
+  return result;
 }
