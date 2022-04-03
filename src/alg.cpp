@@ -25,7 +25,7 @@ int operacii(char op) {
   return c;
   }
 
-int vichislenie(char op, b, a) {
+int vichislenie(char op, int b, int a) {
   int res = 0;
   if (op == '+') {
   res = b + a;
