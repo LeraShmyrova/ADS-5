@@ -40,7 +40,7 @@ int vichisl(char c, int op1, int op2) {
 std::string infx2pstfx(std::string inf) {
   std::string peremen;
   TStack <char, 100> TT;
-  iny j = 0;
+  int j = 0;
   for (int j = 0; j < inf.size(); j++) {
   if (pr(inf[j]) == -2) {
   peremen.push_back(inf[j]);
@@ -75,9 +75,9 @@ std::string infx2pstfx(std::string inf) {
   TT.pop();
   }
   int i = 0;
-  for (int i = 0; i < post.size(); i++) {
-  if (peremen[post.size() - 1] == ' ')
-  peremen.erase(post.size() - 1);
+  for (int i = 0; i < peremen.size(); i++) {
+  if (peremen[peremen.size() - 1] == ' ')
+  peremen.erase(peremen.size() - 1);
   }
   return peremen;
 }
