@@ -46,7 +46,7 @@ std::string infx2pstfx(std::string inf) {
   TStack <char,100> TS;
   int i = 0;
   while (i < inf.size()) {
-  if (operacii(inf[i] == 5) {
+  if (operacii(inf[i] == 5)) {
   peremenaya.push_back(inf[i]);
   peremenaya.push_back(' ');
   }else{
@@ -88,6 +88,21 @@ std::string infx2pstfx(std::string inf) {
 }
 
 int eval(std::string pref) {
-  // добавьте код
-  return 0;
+  TStack <int,100> TSt;
+  int result = 0;
+  int i = 0;
+  while (i < pref.size()) {
+  if (operacii(pref[i] == ) {
+  TSt.push(pref[i] - '0');
+  }else if (operacii(pref[i] < 4) {
+  int a = TSt.get();
+  TSt.pop();
+  int b = TSt.get();
+  TSt.pop();
+  TSt.push(vichislenie(pref[i],a,b));
+  }
+  i++;
+  }
+  res = TSt.get();
+  return res;
 }
